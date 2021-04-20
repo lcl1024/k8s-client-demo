@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Search Result</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" href="/static/js/jquery-jsonview/dist/jquery.jsonview.css">  
+		<script src="/static/js/jquery-3.3.1.min.js"></script>  
+		<script src="/static/js/jquery-jsonview/dist/jquery.jsonview.js"></script>    
+    </head>
+
+    <body>
+			<div class="col-lg-6">
+    			<section class="panel" style="height:1000px">
+        			<header class="panel-heading">
+            			Search Result:
+        			</header>
+        			<div class="panel-body" style="height:980px;overflow:auto">
+            			<input type="hidden" name="json_data" id="json_data" value="{{ .json_data }}"/>
+            			<button id="collapse-btn">Fold</button>
+            			<button id="expand-btn">Unfold</button>
+            			<div id="json"></div>
+        			</div>
+    			</section>
+			</div>
+    </body>
+	<script type="text/javascript">
+    var raw_json = $("#json_data").val();
+    var json = JSON.parse(raw_json);
+    $(function() {
+      $("#json").JSONView(json);
+
+      $("#json-collapsed").JSONView(json, {collapsed: true, nl2br: true});
+
+      $('#collapse-btn').on('click', function() {
+        $('#json').JSONView('collapse');
+      });
+
+      $('#expand-btn').on('click', function() {
+        $('#json').JSONView('expand');
+      });
+    });
+	</script>
+</html>
