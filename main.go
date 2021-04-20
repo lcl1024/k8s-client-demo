@@ -6,15 +6,10 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
-	"os"
 )
 
 func main() {
-	configBytes, err := os.ReadFile("config.yaml")
-	if err != nil {
-		panic(err.Error())
-	}
-	kubeConfig, err := clientcmd.RESTConfigFromKubeConfig(configBytes)
+	kubeConfig, err := clientcmd.BuildConfigFromFlags("", "config.yaml")
 	if err != nil {
 		panic(err.Error())
 	}
